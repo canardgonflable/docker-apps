@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Agence trop cool</h1>
+            <p>Novitates autem si spem adferunt, ut tamquam in herbis non fallacibus fructus appareat,
+                non sunt illae quidem repudiandae, vetustas tamen suo loco conservanda; maxima est enim vis
+                vetustatis et consuetudinis. Quin in ipso equo, cuius modo feci mentionem, si nulla res impediat,
+                nemo est, quin eo, quo consuevit, libentius utatur quam intractato et novo. Nec vero in hoc quod
+                est animal, sed in iis etiam quae sunt inanima, consuetudo valet, cum locis ipsis delectemur,
+                montuosis etiam et silvestribus, in quibus diutius commorati sumus.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Les derniers biens</h2>
+        <div class="row flex">
+            {% for property in properties %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if property.filename %}
+                                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('home') }}"
+                                     alt="card-img-top" style="width: 100%; height:auto;">
+                            {% else %}
+                                <img src="{{ '/images/properties/empty.png' | imagine_filter('home') }}" alt="card-img-top"
+                                     style="width: 100%; height:auto;">
+                            {% endif %}
+                            <h5 class="card-title">
+                                <a class="text-info" style="font-weight: bold; font-size: 22px"
+                                   href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
+                            </h5>
+                            <p class="card-text">{{ property.city }} ({{ property.postalCode }})</p>
+                            <div class="text-dark"
+                                 style="font-weight: bold; font-size: 2rem">{{ property.price | number_format(0, '',' ') }}
+                                €
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
