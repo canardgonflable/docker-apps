@@ -13,7 +13,7 @@ PUIS:
 - docker-compose build
 - docker-compose up
 
-Puis se connecter sur http://masuperagence.local ou http://localhost:80
+Puis se connecter sur http://localhost:80
 
 Se connecter avec :
 Utilisateur : admin
